@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E-mail confirmado - Layouta</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #e9edf3; color: #172033; }
+    main { width: min(420px, calc(100% - 48px)); padding: 32px; border: 1px solid #ccd4df; border-radius: 8px; background: #fff; box-shadow: 0 12px 36px #17203318; }
+    h1 { margin: 0 0 10px; font-size: 24px; }
+    p { margin: 0; line-height: 1.55; color: #4b5567; }
+    strong { color: #2563eb; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #242a33; color: #f1f4f8; }
+      main { background: #303741; border-color: #485260; box-shadow: none; }
+      p { color: #cbd2dc; }
+      strong { color: #78a7ff; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>E-mail confirmado</h1>
+    <p>Sua conta está pronta. Pode fechar esta página, voltar ao <strong>Layouta</strong> e entrar com seu e-mail e senha.</p>
+  </main>
+  <script>history.replaceState(null, "", location.pathname)</script>
+</body>
+</html>
