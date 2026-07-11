@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Layouta: editor de etiquetas de composição têxtil com medidas reais, formatos LNT e compatibilidade com arquivos ETQ.">
+  <meta name="theme-color" content="#2f6fed">
+  <title>Layouta — etiquetas certas, sem brigar com a impressora</title>
+  <link rel="icon" href="assets/layouta-mark.svg" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --accent: #2f6fed;
+      --accent-strong: #2359c7;
+      --ink: #172033;
+      --muted: #5f6b7d;
+      --line: #d8dee8;
+      --surface: #ffffff;
+      --soft: #f3f6fa;
+      --canvas: #e5e9ef;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--surface); color: var(--ink); }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    header { position: absolute; z-index: 2; width: 100%; color: #fff; }
+    nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-size: 18px; font-weight: 700; text-decoration: none; }
+    .brand img { width: 34px; height: 34px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { color: #eef4ff; font-size: 14px; text-decoration: none; }
+
+    .hero {
+      min-height: 690px;
+      display: grid;
+      align-items: center;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: #273142 url("assets/layouta-editor.png") center 20% / cover no-repeat;
+      color: #fff;
+    }
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(18, 28, 46, .82); }
+    .hero-copy { max-width: 720px; padding: 130px 0 90px; }
+    .eyebrow { margin: 0 0 18px; font-size: 13px; font-weight: 700; text-transform: uppercase; }
+    .eyebrow span { display: inline-block; padding: 7px 10px; border: 1px solid rgba(255,255,255,.35); border-radius: 6px; background: rgba(255,255,255,.08); }
+    h1 { margin: 0; max-width: 680px; font-size: clamp(44px, 7vw, 74px); line-height: 1.02; }
+    .lead { margin: 24px 0 0; max-width: 620px; color: #d9e2f1; font-size: 20px; line-height: 1.55; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 18px; border: 1px solid transparent; border-radius: 6px; font-weight: 700; text-decoration: none; }
+    .button.primary { background: var(--accent); color: #fff; }
+    .button.primary:hover { background: var(--accent-strong); }
+    .button.secondary { border-color: rgba(255,255,255,.45); color: #fff; background: rgba(255,255,255,.07); }
+    .meta { margin-top: 14px; color: #b7c3d5; font-size: 13px; }
+
+    section { padding: 84px 0; }
+    .section-head { max-width: 690px; margin-bottom: 38px; }
+    h2 { margin: 0; font-size: 34px; }
+    .section-head p { margin: 12px 0 0; color: var(--muted); font-size: 18px; line-height: 1.6; }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature { padding: 24px; border: 1px solid var(--line); border-radius: 8px; }
+    .feature strong { display: block; margin-bottom: 8px; font-size: 17px; }
+    .feature p { margin: 0; color: var(--muted); line-height: 1.55; }
+
+    .product { background: var(--soft); }
+    .app-shot { overflow: hidden; border: 1px solid #c7cfdb; border-radius: 8px; background: var(--canvas); box-shadow: 0 24px 60px rgba(32, 47, 71, .16); }
+    .app-shot img { width: 100%; height: auto; }
+
+    .compatibility { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .compatibility p { color: var(--muted); font-size: 17px; line-height: 1.65; }
+    .file-flow { display: grid; gap: 10px; }
+    .file { display: flex; align-items: center; justify-content: space-between; min-height: 58px; padding: 0 18px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); }
+    .file code { font-size: 15px; }
+    .file span { color: var(--muted); font-size: 13px; }
+
+    .download { padding: 72px 0; background: #273142; color: #fff; }
+    .download-row { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .download h2 { font-size: 32px; }
+    .download p { margin: 10px 0 0; color: #cbd5e3; }
+
+    footer { padding: 28px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 20px; }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 28px, 1120px); }
+      .nav-links a:not(.button) { display: none; }
+      .hero { min-height: 620px; }
+      .hero-copy { padding-top: 110px; }
+      .lead { font-size: 18px; }
+      section { padding: 62px 0; }
+      .features, .compatibility { grid-template-columns: 1fr; }
+      .compatibility { gap: 30px; }
+      .download-row { align-items: flex-start; flex-direction: column; }
+      footer .wrap { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Navegação principal">
+      <a class="brand" href="#inicio"><img src="assets/layouta-mark.svg" alt="">Layouta</a>
+      <div class="nav-links">
+        <a href="#recursos">Recursos</a>
+        <a href="#compatibilidade">Compatibilidade</a>
+        <a class="button secondary" href="https://github.com/treeks12/layouta-releases/releases/latest/download/LayoutaSetup.exe">Baixar</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="wrap hero-copy">
+        <p class="eyebrow"><span>Beta para Windows</span></p>
+        <h1>Layouta</h1>
+        <p class="lead">Crie, revise e imprima etiquetas de composição sem perder tempo acertando alinhamento, símbolos e folha na tentativa.</p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/treeks12/layouta-releases/releases/latest/download/LayoutaSetup.exe">Baixar o Layouta</a>
+          <a class="button secondary" href="#produto">Ver o editor</a>
+        </div>
+        <p class="meta">Instalador completo · conta gratuita · formatos LNT e arquivos ETQ</p>
+      </div>
+    </section>
+
+    <section id="recursos">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>O trabalho conhecido, sem as partes irritantes</h2>
+          <p>O Layouta preserva a lógica de quem já produz etiquetas e acrescenta as ferramentas que deveriam estar ali desde o começo.</p>
+        </div>
+        <div class="features">
+          <article class="feature"><strong>Alinhamento inteligente</strong><p>Snap, guias, distribuição, tamanho igual e seleção múltipla para organizar símbolos e textos rapidamente.</p></article>
+          <article class="feature"><strong>Revisão antes de imprimir</strong><p>Identifica composição incompleta, sequência de cuidados, conteúdo fora da área segura e outros erros comuns.</p></article>
+          <article class="feature"><strong>Folha que corresponde ao papel</strong><p>Formatos LNT com medidas reais, prévia da tiragem e calibração salva por impressora.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="product" id="produto">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Um canvas feito para etiquetas</h2>
+          <p>Ferramentas visíveis, medidas em milímetros e símbolos organizados pela sequência de cuidados.</p>
+        </div>
+        <div class="app-shot"><img src="assets/layouta-editor.png" alt="Editor do Layouta mostrando uma etiqueta de composição LNT-2"></div>
+      </div>
+    </section>
+
+    <section id="compatibilidade">
+      <div class="wrap compatibility">
+        <div>
+          <h2>Seus modelos antigos continuam úteis</h2>
+          <p>Abra etiquetas do MasterPrint no formato ETQ e converta os trabalhos que realmente usa para o formato nativo do Layouta. O original permanece intacto.</p>
+        </div>
+        <div class="file-flow" aria-label="Fluxo de arquivos">
+          <div class="file"><code>modelo-antigo.ETQ</code><span>abrir e editar</span></div>
+          <div class="file"><code>modelo-atual.layouta</code><span>salvar e reutilizar</span></div>
+          <div class="file"><code>folha LNT-2</code><span>prévia e impressão</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="download" id="download">
+      <div class="wrap download-row">
+        <div><h2>Pronto para testar?</h2><p>A versão beta inclui tudo o que o programa precisa para funcionar.</p></div>
+        <a class="button primary" href="https://github.com/treeks12/layouta-releases/releases/latest/download/LayoutaSetup.exe">Baixar para Windows</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap"><span>Layouta · etiquetas certas, sem brigar com a impressora.</span><span>Em desenvolvimento ativo.</span></div></footer>
+</body>
+</html>

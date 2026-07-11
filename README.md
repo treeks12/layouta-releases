@@ -1,33 +1,49 @@
-# Layouta
+<p align="center">
+  <img src="assets/layouta-mark.svg" width="72" alt="Layouta">
+</p>
 
-**Etiquetas certas, sem brigar com a impressora.**
+<h1 align="center">Layouta</h1>
 
-O Layouta é um editor para criar, revisar e imprimir etiquetas de composição
-têxtil com precisão. Ele combina uma área de edição simples com símbolos de
-cuidado, formatos de folhas LNT, alinhamento inteligente e compatibilidade com
-arquivos ETQ legados.
+<p align="center">
+  Etiquetas certas, sem brigar com a impressora.
+</p>
 
-O objetivo é bem direto: preservar o que já funciona no fluxo de quem usa o
-MasterPrint há anos e melhorar tudo aquilo que costumava exigir tentativa,
-erro e paciência.
+<p align="center">
+  <a href="../../releases/latest"><strong>Baixar para Windows</strong></a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://treeks12.github.io/layouta-releases/">Conhecer o Layouta</a>
+</p>
 
-## Download
+<p align="center">
+  <img alt="Versão" src="https://img.shields.io/github/v/release/treeks12/layouta-releases?display_name=tag&style=flat-square&color=2f6fed">
+  <img alt="Windows" src="https://img.shields.io/badge/Windows-10%2F11-2f6fed?style=flat-square">
+  <img alt="Estado beta" src="https://img.shields.io/badge/estado-beta-f59e0b?style=flat-square">
+</p>
 
-[Baixar a versão mais recente do Layouta](../../releases/latest)
+![Editor do Layouta](assets/layouta-editor.png)
 
-O instalador inclui tudo o que o programa precisa. Depois da instalação, novas
-versões podem ser baixadas pelo próprio Layouta.
+## Feito para o trabalho real
 
-## Estado do projeto
+O Layouta cria, revisa e imprime etiquetas de composição têxtil com medidas
+reais. Ele preserva o fluxo conhecido por quem usou MasterPrint por anos, mas
+acrescenta alinhamento inteligente, desfazer, revisão têxtil e uma prévia de
+impressão que corresponde à folha.
 
-O Layouta ainda está em fase beta. A edição e a impressão já são funcionais,
-mas resultados físicos sempre dependem da combinação entre impressora, folha e
-calibração.
+- **Compatibilidade:** abre arquivos `.ETQ` legados e salva no formato `.layouta`.
+- **Precisão:** formatos LNT, repetição em folha A4 e calibração por impressora.
+- **Edição confortável:** seleção múltipla, snap, distribuição, tamanho igual e texto automático.
+- **Cuidados têxteis:** catálogo visual organizado pela sequência ABNT e revisão antes de imprimir.
+- **Instalação simples:** um único instalador, sem exigir o .NET na máquina.
 
-Este repositório armazena apenas os instaladores públicos. O código-fonte e os
-arquivos internos de desenvolvimento não são distribuídos aqui.
+## Instalação
 
----
+1. Baixe o [`LayoutaSetup.exe`](../../releases/latest/download/LayoutaSetup.exe).
+2. Execute o instalador.
+3. Crie ou entre em uma conta gratuita para abrir o editor.
 
-Feito para quem precisa produzir etiquetas, não aprender a contornar o
-programa que deveria produzi-las.
+O Layouta está em beta. A impressão foi calibrada com folhas reais, mas cada
+combinação de impressora e material pode exigir um pequeno ajuste no assistente
+de calibração.
+
+> O código-fonte e os arquivos internos de desenvolvimento permanecem privados.
+> Este repositório distribui somente o instalador oficial e seu manifesto de atualização.
